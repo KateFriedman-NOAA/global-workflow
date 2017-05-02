@@ -74,6 +74,9 @@ export FCSTEXEC=fv3_gfs_${TYPE}.${COMP}.${MODE}.x
 export APRUN="aprun -n $tasks -N $task_per_node -d $nth_f $j_opt -cc depth" 
 #--------------------------------------------------------------------------
 
+#--NSST optins
+export nstf_name="2,0,1,0,5"
+
 #--execute the forecast
 $BASE_GSM/scripts/exglobal_fcst_nemsfv3gfs.sh
 if [ $? != 0 ]; then echo "forecast failed, exit"; exit; fi
