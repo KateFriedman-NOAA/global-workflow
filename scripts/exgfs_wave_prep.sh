@@ -322,19 +322,19 @@ source "${USHgfs}/preamble.sh"
       ymdh_rtofs=$ymdh_beg
 
       if [  "$FHMAX_WAV_CUR" -le 72 ]; then 
-        rtofsfile1="${COM_RTOFS}/${WAVECUR_DID}.${RPDY}/rtofs_glo_2ds_f024_prog.nc"
-        rtofsfile2="${COM_RTOFS}/${WAVECUR_DID}.${RPDY}/rtofs_glo_2ds_f048_prog.nc"
-        rtofsfile3="${COM_RTOFS}/${WAVECUR_DID}.${RPDY}/rtofs_glo_2ds_f072_prog.nc"
+        rtofsfile1="${COM_RTOFS}/rtofs.${RPDY}/rtofs_glo_2ds_f024_prog.nc"
+        rtofsfile2="${COM_RTOFS}/rtofs.${RPDY}/rtofs_glo_2ds_f048_prog.nc"
+        rtofsfile3="${COM_RTOFS}/rtofs.${RPDY}/rtofs_glo_2ds_f072_prog.nc"
         if [ ! -f $rtofsfile1 ] || [ ! -f $rtofsfile2 ] || [ ! -f $rtofsfile3 ]; then 
            #Needed current files are not available, so use RTOFS from previous day 
            export RPDY=$($NDATE -24 ${RPDY}00 | cut -c1-8)
         fi 
       else
-        rtofsfile1="${COM_RTOFS}/${WAVECUR_DID}.${RPDY}/rtofs_glo_2ds_f096_prog.nc"
-        rtofsfile2="${COM_RTOFS}/${WAVECUR_DID}.${RPDY}/rtofs_glo_2ds_f120_prog.nc"
-        rtofsfile3="${COM_RTOFS}/${WAVECUR_DID}.${RPDY}/rtofs_glo_2ds_f144_prog.nc"
-        rtofsfile4="${COM_RTOFS}/${WAVECUR_DID}.${RPDY}/rtofs_glo_2ds_f168_prog.nc"
-        rtofsfile5="${COM_RTOFS}/${WAVECUR_DID}.${RPDY}/rtofs_glo_2ds_f192_prog.nc"
+        rtofsfile1="${COM_RTOFS}/rtofs.${RPDY}/rtofs_glo_2ds_f096_prog.nc"
+        rtofsfile2="${COM_RTOFS}/rtofs.${RPDY}/rtofs_glo_2ds_f120_prog.nc"
+        rtofsfile3="${COM_RTOFS}/rtofs.${RPDY}/rtofs_glo_2ds_f144_prog.nc"
+        rtofsfile4="${COM_RTOFS}/rtofs.${RPDY}/rtofs_glo_2ds_f168_prog.nc"
+        rtofsfile5="${COM_RTOFS}/rtofs.${RPDY}/rtofs_glo_2ds_f192_prog.nc"
         if [ ! -f $rtofsfile1 ] || [ ! -f $rtofsfile2 ] || [ ! -f $rtofsfile3 ] ||
             [ ! -f $rtofsfile4 ] || [ ! -f $rtofsfile5 ]; then
             #Needed current files are not available, so use RTOFS from previous day 
@@ -360,8 +360,8 @@ source "${USHgfs}/preamble.sh"
         fhr_rtofs=$(${NHOUR} ${ymdh_rtofs} ${RPDY}00)
         fh3_rtofs=$(printf "%03d" "${fhr_rtofs#0}")
 
-        curfile1h=${COM_RTOFS}/${WAVECUR_DID}.${RPDY}/rtofs_glo_2ds_${fext}${fh3_rtofs}_prog.nc
-        curfile3h=${COM_RTOFS}/${WAVECUR_DID}.${RPDY}/rtofs_glo_2ds_${fext}${fh3_rtofs}_prog.nc
+        curfile1h=${COM_RTOFS}/rtofs.${RPDY}/rtofs_glo_2ds_${fext}${fh3_rtofs}_prog.nc
+        curfile3h=${COM_RTOFS}/rtofs.${RPDY}/rtofs_glo_2ds_${fext}${fh3_rtofs}_prog.nc
 
         if [ -s ${curfile1h} ]  && [ "${FLGHF}" = "T" ] ; then
           curfile=${curfile1h}
@@ -442,7 +442,7 @@ source "${USHgfs}/preamble.sh"
         set_trace
       fi
 
-      files=$(ls ${WAVECUR_DID}.* 2> /dev/null)
+      files=$(ls rtofs.* 2> /dev/null)
 
       if [ -z "$files" ]
       then
